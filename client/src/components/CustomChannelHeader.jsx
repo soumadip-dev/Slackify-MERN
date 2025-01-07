@@ -33,6 +33,7 @@ const CustomChannelHeader = () => {
     setShowPinnedMessages(true);
   };
 
+  // Function to create a video call URL and send it to the channel
   const handleVideoCall = async () => {
     if (channel) {
       const callUrl = `${window.location.origin}/call/${channel.id}`;

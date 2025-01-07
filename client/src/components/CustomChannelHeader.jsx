@@ -26,6 +26,7 @@ const CustomChannelHeader = () => {
   // If no of member is 2 and it include the current user then it is a DM
   const isDM = channel.data?.member_count === 2 && channel.data?.id.includes('user_');
 
+  // Function to show/hide the pinned messages modal and fetch the pinned messages
   const handleShowPinned = async () => {
     const channelState = await channel.query();
     setPinnedMessages(channelState.pinned_messages);

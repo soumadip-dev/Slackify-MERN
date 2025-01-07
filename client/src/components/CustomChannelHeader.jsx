@@ -33,6 +33,15 @@ const CustomChannelHeader = () => {
     setShowPinnedMessages(true);
   };
 
+  const handleVideoCall = async () => {
+    if (channel) {
+      const callUrl = `${window.location.origin}/call/${channel.id}`;
+      await channel.sendMessage({
+        text: `Hey! I've started a video call. Join me here: ${callUrl}`,
+      });
+    }
+  };
+
   return (
     <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
       <div className="flex items-center gap-3">

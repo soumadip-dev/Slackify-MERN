@@ -26,6 +26,12 @@ const CustomChannelHeader = () => {
   // If no of member is 2 and it include the current user then it is a DM
   const isDM = channel.data?.member_count === 2 && channel.data?.id.includes('user_');
 
+  const handleShowPinned = async () => {
+    const channelState = await channel.query();
+    setPinnedMessages(channelState.pinned_messages);
+    setShowPinnedMessages(true);
+  };
+
   return (
     <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
       <div className="flex items-center gap-3">

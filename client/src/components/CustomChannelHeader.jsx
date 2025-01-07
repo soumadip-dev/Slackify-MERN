@@ -46,7 +46,13 @@ const CustomChannelHeader = () => {
   return (
     <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">CustomChannelHeader</div>
+        <div className="flex items-center gap-2">
+          {channel.data?.private ? (
+            <LockIcon className="size-4 text-[#616061]" />
+          ) : (
+            <HashIcon className="size-4 text-[#616061]" />
+          )}
+        </div>
       </div>
     </div>
   );

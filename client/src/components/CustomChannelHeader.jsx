@@ -67,6 +67,15 @@ const CustomChannelHeader = () => {
           </span>
         </div>
       </div>
+      <div className="flex items-center gap-3">
+        <button
+          className="flex items-center gap-2 hover:bg-[#F8F8F8] py-1 px-2 rounded"
+          onClick={() => setShowMembers(true)}
+        >
+          <UsersIcon className="size-5 text-[#616061]" />
+          <span className="text-sm text-[#616061]">{memberCount}</span>
+        </button>
+      </div>
     </div>
   );
 };

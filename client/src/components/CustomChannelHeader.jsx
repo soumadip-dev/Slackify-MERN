@@ -61,6 +61,10 @@ const CustomChannelHeader = () => {
               className="size-7 rounded-full object-cover mr-1"
             />
           )}
+
+          <span className="font-medium text-[#1D1C1D]">
+            {isDM ? otherUser?.user?.name || otherUser?.user?.id : channel.data?.id}
+          </span>
         </div>
       </div>
     </div>

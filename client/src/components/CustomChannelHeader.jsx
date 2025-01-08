@@ -47,10 +47,19 @@ const CustomChannelHeader = () => {
     <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
+          // Show different icons based on the channel type
           {channel.data?.private ? (
             <LockIcon className="size-4 text-[#616061]" />
           ) : (
             <HashIcon className="size-4 text-[#616061]" />
+          )}
+          // Show the user image if it is a DM
+          {isDM && otherUser?.user?.image && (
+            <img
+              src={otherUser.user.image}
+              alt={otherUser.user.name || otherUser.user.id}
+              className="size-7 rounded-full object-cover mr-1"
+            />
           )}
         </div>
       </div>

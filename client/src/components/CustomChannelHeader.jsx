@@ -91,6 +91,10 @@ const CustomChannelHeader = () => {
             Invite
           </button>
         )}
+
+        <button className="hover:bg-[#F8F8F8] p-1 rounded" onClick={handleShowPinned}>
+          <PinIcon className="size-4 text-[#616061]" />
+        </button>
       </div>
     </div>
   );

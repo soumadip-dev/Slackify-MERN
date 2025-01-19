@@ -84,6 +84,13 @@ const CustomChannelHeader = () => {
         >
           <VideoIcon className="size-5 text-[#1264A3]" />
         </button>
+
+        {/* Invite button for private channels */}
+        {channel.data?.private && (
+          <button className="btn btn-primary" onClick={() => setShowInvite(true)}>
+            Invite
+          </button>
+        )}
       </div>
     </div>
   );

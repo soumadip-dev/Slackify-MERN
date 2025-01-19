@@ -44,14 +44,14 @@ const CustomChannelHeader = () => {
   };
 
   return (
-    <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
+    <div className="h-14 border-b border-gray-100 flex items-center px-4 justify-between bg-white shadow-sm">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           {/* Show different icons based on the channel type */}
           {channel.data?.private ? (
-            <LockIcon className="size-4 text-[#616061]" />
+            <LockIcon className="size-4 text-gray-500" />
           ) : (
-            <HashIcon className="size-4 text-[#616061]" />
+            <HashIcon className="size-4 text-gray-500" />
           )}
           {/* Show the user image if it is a DM */}
           {isDM && otherUser?.user?.image && (
@@ -62,7 +62,7 @@ const CustomChannelHeader = () => {
             />
           )}
           {/* If it is a DM, show the user name, else show the channel name */}
-          <span className="font-medium text-[#1D1C1D]">
+          <span className="font-semibold text-gray-900">
             {isDM ? otherUser?.user?.name || otherUser?.user?.id : channel.data?.id}
           </span>
         </div>
@@ -70,30 +70,38 @@ const CustomChannelHeader = () => {
       <div className="flex items-center gap-3">
         {/* Show the members button with the member count */}
         <button
-          className="flex items-center gap-2 hover:bg-[#F8F8F8] py-1 px-2 rounded"
+          className="flex items-center gap-1.5 hover:bg-gray-100 py-1.5 px-2.5 rounded-lg transition-colors"
           onClick={() => setShowMembers(true)}
         >
-          <UsersIcon className="size-5 text-[#616061]" />
-          <span className="text-sm text-[#616061]">{memberCount}</span>
+          <UsersIcon className="size-5 text-gray-600" />
+          <span className="text-sm font-medium text-gray-600">{memberCount}</span>
         </button>
         {/* Video call button */}
         <button
-          className="hover:bg-[#F8F8F8] p-1 rounded"
+          className="hover:bg-gray-100 p-1.5 rounded-lg transition-colors"
           onClick={handleVideoCall}
           title="Start Video Call"
         >
-          <VideoIcon className="size-5 text-[#1264A3]" />
+          <VideoIcon className="size-5 text-blue-600" />
         </button>
 
         {/* Invite button for private channels */}
         {channel.data?.private && (
-          <button className="btn btn-primary" onClick={() => setShowInvite(true)}>
+          <button
+            style={{ backgroundColor: '#4E1B87' }}
+            className="text-white py-1.5 px-3 rounded-lg text-sm font-medium transition-colors hover:brightness-90"
+            onClick={() => setShowInvite(true)}
+          >
             Invite
           </button>
         )}
+
         {/* Pin button to open the pinned messages modal */}
-        <button className="hover:bg-[#F8F8F8] p-1 rounded" onClick={handleShowPinned}>
-          <PinIcon className="size-4 text-[#616061]" />
+        <button
+          className="hover:bg-gray-100 p-1.5 rounded-lg transition-colors"
+          onClick={handleShowPinned}
+        >
+          <PinIcon className="size-4 text-gray-600" />
         </button>
       </div>
     </div>

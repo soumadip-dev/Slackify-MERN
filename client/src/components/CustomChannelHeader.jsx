@@ -111,6 +111,14 @@ const CustomChannelHeader = () => {
           onClose={() => setShowMembers(false)}
         />
       )}
+
+      {/* Show the PinnedMessagesModal */}
+      {showPinnedMessages && (
+        <PinnedMessagesModal
+          pinnedMessages={pinnedMessages}
+          onClose={() => setShowPinnedMessages(false)}
+        />
+      )}
     </div>
   );
 };

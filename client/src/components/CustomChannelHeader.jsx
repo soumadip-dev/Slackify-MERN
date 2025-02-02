@@ -104,6 +104,13 @@ const CustomChannelHeader = () => {
           <PinIcon className="size-4 text-gray-600" />
         </button>
       </div>
+      {/* Show the MembersModal*/}
+      {showMembers && (
+        <MembersModal
+          members={Object.values(channel.state.members)}
+          onClose={() => setShowMembers(false)}
+        />
+      )}
     </div>
   );
 };

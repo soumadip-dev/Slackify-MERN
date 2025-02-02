@@ -119,6 +119,9 @@ const CustomChannelHeader = () => {
           onClose={() => setShowPinnedMessages(false)}
         />
       )}
+
+      {/* Show the InviteModal in private channels */}
+      {showInvite && <InviteModal channel={channel} onClose={() => setShowInvite(false)} />}
     </div>
   );
 };

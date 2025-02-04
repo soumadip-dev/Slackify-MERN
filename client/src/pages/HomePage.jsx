@@ -96,6 +96,12 @@ const HomePage = () => {
             </Channel>
           </div>
         </div>
+        {isCreateModalOpen && (
+          <CreateChannelModal
+            isOpen={isCreateModalOpen}
+            onClose={() => setIsCreateModalOpen(false)}
+          />
+        )}
       </Chat>
     </div>
   );

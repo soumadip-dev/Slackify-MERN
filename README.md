@@ -13,7 +13,7 @@
 </p>
 
 <div align="center">
-  <img src="./client/public/SS_for _README.png" alt="Slackify screenshot" width="900">
+  <img src="./client/public/SS_README.png" alt="Slackify screenshot" width="900">
 </div>
 
 <p align="center">🚧 Currently Building 🚧</p>

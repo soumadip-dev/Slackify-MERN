@@ -2,3 +2,4 @@
 node_modules
 commit.txt
 pnpm-lock.yaml
+.DS_Store

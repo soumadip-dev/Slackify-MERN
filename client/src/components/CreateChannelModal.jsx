@@ -2,16 +2,17 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 const CreateChannelModal = () => {
-  const [channelName, setChannelName] = useState('');
-  const [channelType, setChannelType] = useState('public');
-  const [description, setDescription] = useState('');
-  const [isCreating, setIsCreating] = useState(false);
-  const [error, setError] = useState('');
-  const [users, setUsers] = useState([]);
-  const [selectedMembers, setSelectedMembers] = useState([]);
-  const [loadingUsers, setLoadingUsers] = useState(false);
-  const [_, setSearchParams] = useSearchParams();
-  
+  const [channelName, setChannelName] = useState(''); // Name of the channel
+  const [channelType, setChannelType] = useState('public'); // Type of the channel (public or private)
+  const [description, setDescription] = useState(''); // Description of the channel
+  const [isCreating, setIsCreating] = useState(false); // Flag to indicate if the channel is being created
+  const [error, setError] = useState(''); // Error message
+  const [users, setUsers] = useState([]); // List of users
+  const [selectedMembers, setSelectedMembers] = useState([]); // List of selected members
+  const [loadingUsers, setLoadingUsers] = useState(false); // Flag to indicate if users are being loaded from stream
+
+  const [_, setSearchParams] = useSearchParams(); // URL search params
+
   return <div>CreateChannelModal</div>;
 };
 

@@ -67,6 +67,7 @@ const CreateChannelModal = () => {
     return '';
   };
 
+  // Function to handle channel name change
   const handleChannelNameChange = e => {
     const value = e.target.value;
     setChannelName(value);

@@ -67,6 +67,12 @@ const CreateChannelModal = () => {
     return '';
   };
 
+  const handleChannelNameChange = e => {
+    const value = e.target.value;
+    setChannelName(value);
+    setError(validateChannelName(value)); // set error message based on channel name from the above function
+  };
+
   return <div>CreateChannelModal</div>;
 };
 

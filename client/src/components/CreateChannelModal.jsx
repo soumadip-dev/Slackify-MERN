@@ -49,13 +49,14 @@ const CreateChannelModal = () => {
     setSelectedMembers([]);
   }, []);
 
+  // If channel type is public, set selected members to all users
   useEffect(() => {
     if (channelType === 'public') {
       setSelectedMembers(users.map(user => user.id));
     } else {
       setSelectedMembers([]);
     }
-  });
+  }, [channelType, users]);
 
   // Function to validate the channel name
   const validateChannelName = name => {

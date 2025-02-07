@@ -40,6 +40,14 @@ const CreateChannelModal = () => {
     fetchUsers();
   }, [client]);
 
+  useEffect(() => {
+    setChannelName('');
+    setDescription('');
+    setChannelType('public');
+    setError('');
+    setSelectedMembers([]);
+  }, []);
+
   // Function to validate the channel name
   const validateChannelName = name => {
     if (!name.trim()) return 'Channel name is required';

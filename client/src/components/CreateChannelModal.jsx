@@ -40,6 +40,7 @@ const CreateChannelModal = () => {
     fetchUsers();
   }, [client]);
 
+  // Reset state when the modal is closed
   useEffect(() => {
     setChannelName('');
     setDescription('');

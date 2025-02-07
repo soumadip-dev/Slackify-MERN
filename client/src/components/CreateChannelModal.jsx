@@ -38,7 +38,7 @@ const CreateChannelModal = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [client]);
 
   // Function to validate the channel name
   const validateChannelName = name => {

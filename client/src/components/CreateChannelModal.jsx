@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { useChatContext } from 'stream-chat-react';
 
@@ -16,7 +16,29 @@ const CreateChannelModal = () => {
 
   const { client, setActiveChannel } = useChatContext();
 
-  
+  // Fetch users for member selection
+  useEffect(() => {
+    const fetchUsers = async () => {
+      if (!client?.user) return; // Return if client or user is not available
+      setLoadingUsers(true); // Set loading state to true
+      try {
+        // Fetch users from Stream except the current user and sort by name and limit to 100
+        const response = await client.queryUsers(
+          { id: { $ne: client.user.id } },
+          { name: 1 },
+          { limit: 100 }
+        );
+
+        setUsers(response.users || []);
+      } catch (error) {
+        console.log('Error fetching users', error);
+        setUsers([]);
+      } finally {
+        setLoadingUsers(false);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   // Function to validate the channel name
   const validateChannelName = name => {

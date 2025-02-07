@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router';
+import { useChatContext } from 'stream-chat-react';
 
 const CreateChannelModal = () => {
   const [channelName, setChannelName] = useState(''); // Name of the channel
@@ -12,6 +13,8 @@ const CreateChannelModal = () => {
   const [loadingUsers, setLoadingUsers] = useState(false); // Flag to indicate if users are being loaded from stream
 
   const [_, setSearchParams] = useSearchParams(); // URL search params
+
+  const { client, setActiveChannel } = useChatContext();
 
   return <div>CreateChannelModal</div>;
 };

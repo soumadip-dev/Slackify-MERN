@@ -40,7 +40,7 @@ const CreateChannelModal = () => {
     fetchUsers();
   }, [client]);
 
-  // Reset state when the modal is closed
+  // Reset state when the modal is closed (NOT NIDDED)
   useEffect(() => {
     setChannelName('');
     setDescription('');
@@ -48,6 +48,14 @@ const CreateChannelModal = () => {
     setError('');
     setSelectedMembers([]);
   }, []);
+
+  useEffect(() => {
+    if (channelType === 'public') {
+      setSelectedMembers(users.map(user => user.id));
+    } else {
+      setSelectedMembers([]);
+    }
+  });
 
   // Function to validate the channel name
   const validateChannelName = name => {

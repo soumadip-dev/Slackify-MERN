@@ -16,6 +16,14 @@ const CreateChannelModal = () => {
 
   const { client, setActiveChannel } = useChatContext();
 
+  const validateChannelName = name => {
+    if (!name.trim()) return 'Channel name is required';
+    if (name.length < 3) return 'Channel name must be at least 3 characters';
+    if (name.length > 22) return 'Channel name must be less than 22 characters';
+
+    return '';
+  };
+
   return <div>CreateChannelModal</div>;
 };
 

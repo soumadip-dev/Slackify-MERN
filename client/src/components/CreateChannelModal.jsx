@@ -74,6 +74,7 @@ const CreateChannelModal = () => {
     setError(validateChannelName(value)); // set error message based on channel name from the above function
   };
 
+  // Function to handle member toggle
   const handleMemberToggle = id => {
     if (selectedMembers.includes(id)) {
       setSelectedMembers(selectedMembers.filter(uid => uid !== id));

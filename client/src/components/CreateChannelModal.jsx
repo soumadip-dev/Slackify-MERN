@@ -83,6 +83,28 @@ const CreateChannelModal = () => {
     }
   };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const validationError = validateChannelName(channelName); // validate channel name
+    if (validationError) return setError(validationError); // return if there is an error in name validation
+    if (isCreating || !client?.user) return; // return if creating or client or user is not available
+    setIsCreating(true); // set creating state to true
+    setError(''); // clear error message
+    try {
+      // MY COOL CHANNEL !#1 => my-cool-channel-1
+      const channelId = channelName
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-_]/g, '')
+        .slice(0, 20);
+    } catch (error) {
+      console.log('Error creating the channel', error);
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
   return <div>CreateChannelModal</div>;
 };
 

@@ -98,6 +98,14 @@ const CreateChannelModal = () => {
         .replace(/\s+/g, '-')
         .replace(/[^a-z0-9-_]/g, '')
         .slice(0, 20);
+
+      // Prepare the channeldata
+      const channelData = {
+        name: channelName.trim(),
+        created_by_id: client.user.id,
+        members: [client.user.id, ...selectedMembers],
+      };
+      
     } catch (error) {
       console.log('Error creating the channel', error);
     } finally {

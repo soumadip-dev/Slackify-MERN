@@ -105,7 +105,8 @@ const CreateChannelModal = () => {
         created_by_id: client.user.id,
         members: [client.user.id, ...selectedMembers],
       };
-      
+
+      if (description) channelData.description = description;
     } catch (error) {
       console.log('Error creating the channel', error);
     } finally {

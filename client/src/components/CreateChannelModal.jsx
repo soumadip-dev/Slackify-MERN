@@ -107,6 +107,14 @@ const CreateChannelModal = () => {
       };
 
       if (description) channelData.description = description;
+
+      if (channelType === 'private') {
+        channelData.private = true;
+        channelData.visibility = 'private';
+      } else {
+        channelData.visibility = 'public';
+        channelData.discoverable = true; // Custom property to make the channel discoverable for later use
+      }
     } catch (error) {
       console.log('Error creating the channel', error);
     } finally {

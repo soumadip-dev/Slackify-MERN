@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { useChatContext } from 'stream-chat-react';
+import toast from 'react-hot-toast';
 
 const CreateChannelModal = () => {
   const [channelName, setChannelName] = useState(''); // Name of the channel
@@ -126,6 +127,7 @@ const CreateChannelModal = () => {
 
       // Set the active channel
       setActiveChannel(channel);
+      toast.success(`Channel "${channelName}" created successfully!`);
     } catch (error) {
       console.log('Error creating the channel', error);
     } finally {

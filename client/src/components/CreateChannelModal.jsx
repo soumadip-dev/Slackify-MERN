@@ -235,6 +235,77 @@ const CreateChannelModal = ({ onClose }) => {
               </label>
             </div>
           </div>
+
+          {/* add members component */}
+          {channelType === 'private' && (
+            <div className="my-6">
+              <label>Add members</label>
+              <div className="flex items-center gap-4 mb-4">
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-small"
+                  onClick={() => setSelectedMembers(users.map(u => u.id))}
+                  disabled={loadingUsers || users.length === 0}
+                >
+                  <UsersIcon className="w-4 h-4" />
+                  Select Everyone
+                </button>
+                <span className="text-[0.85rem] text-white/70 bg-white/10 py-2 px-3 rounded-lg backdrop-blur-[10px]">
+                  {selectedMembers.length} selected
+                </span>
+              </div>
+              <div className="max-h-[200px] overflow-y-auto border border-white/15 rounded-xl p-3 bg-white/5 backdrop-blur-[10px]">
+                {loadingUsers ? (
+                  <p>Loading users...</p>
+                ) : users.length === 0 ? (
+                  <p>No users found</p>
+                ) : (
+                  users.map(user => (
+                    <label
+                      key={user.id}
+                      className="flex items-center gap-3 p-3 mb-2 cursor-pointer rounded-xl transition-all duration-200 ease-in-out bg-white/[0.02]"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedMembers.includes(user.id)}
+                        onChange={() => handleMemberToggle(user.id)}
+                        className="m-0 accent-[#7209b7] scale-110"
+                      />
+                      {user.image ? (
+                        <img
+                          src={user.image}
+                          alt={user.name || user.id}
+                          className="w-8 h-8 rounded-full border-2 border-white/20"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 rounded-full border-2 border-white/20 bg-gradient-to-br from-[#7209b7] to-[#533483] flex items-center justify-center text-white font-semibold text-[0.85rem]">
+                          <span>{(user.name || user.id).charAt(0).toUpperCase()}</span>
+                        </div>
+                      )}
+                      <span className="text-[0.9rem] text-white/90 font-medium">
+                        {user.name || user.id}
+                      </span>
+                    </label>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Description */}
+          <div className="my-6">
+            <label htmlFor="description">Description (optional)</label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              placeholder="What's this channel about?"
+              className="w-full py-4 pl-11 pr-4 border border-white/15 rounded-xl text-sm text-white/95 bg-white/8 backdrop-blur-[10px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] shadow-inner"
+              rows={3}
+            />
+          </div>
+
+          {/* Actions */}
         </form>
       </div>
     </div>

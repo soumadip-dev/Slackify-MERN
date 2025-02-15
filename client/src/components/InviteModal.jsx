@@ -12,6 +12,23 @@ const InviteModal = ({ channel, onClose }) => {
   const [error, setError] = useState(''); // Error message
   const [isInviting, setIsInviting] = useState(false); // Flag to indicate if the members are being invited
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setIsLoadingUsers(true); // Set loading state to true
+      setError(''); // Clear error message
+      try {
+        const members = Object.keys(channel.state.members); // Get the members of the channel
+        const res = await client.queryUsers({ id: { $nin: members } }, { name: 1 }, { limit: 30 });
+        setUsers(res.users);
+      } catch (error) {
+        console.log('Error fetching users', error);
+        setError('Failed to load users');
+      } finally {
+        setIsLoadingUsers(false);
+      }
+    };
+  }, [channel, client]);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-xl mx-auto border border-gray-200">

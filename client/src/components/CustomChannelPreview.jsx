@@ -9,7 +9,7 @@ const CustomChannelPreview = ({ channel, setActiveChannel, activeChannel }) => {
 
   const unreadCount = channel.countUnread();
   return (
-    <div className="px-5 py-1">
+    <div className="px-5 py-1 space-y-4">
       <button
         onClick={() => setActiveChannel(channel)}
         className={`w-full text-left px-4 py-3 rounded-xl flex items-center transition-all duration-200 ease-in-out relative ${

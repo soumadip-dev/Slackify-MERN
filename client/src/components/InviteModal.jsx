@@ -57,6 +57,67 @@ const InviteModal = ({ channel, onClose }) => {
             <XIcon className="w-5 h-5 text-gray-600" />
           </button>
         </div>
+
+        {/* CONTENT */}
+        <div className="">
+          {isLoadingUsers && <p>Loading users...</p>}
+          {error && <p className="">{error}</p>}
+          {users.length === 0 && !isLoadingUsers && <p>No users found</p>}
+
+          {users.length > 0 &&
+            users.map(user => {
+              const isChecked = selectedMembers.includes(user.id);
+
+              return (
+                <label
+                  key={user.id}
+                  className={`flex items-center gap-4 p-3 rounded-lg cursor-pointer transition-all shadow-sm bg-white hover:bg-[#f5f3ff] border-2 ${
+                    isChecked ? 'border-[#611f69] bg-[#f3e6fa]' : 'border-gray-200'
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    className="checkbox checbox-primay checkbox-sm accent-[#611f69]"
+                    value={user.id}
+                    onChange={e => {
+                      if (e.target.checked) setSelectedMembers([...selectedMembers, user.id]);
+                      else setSelectedMembers(selectedMembers.filter(id => id !== user.id));
+                    }}
+                  />
+
+                  {user.image ? (
+                    <img
+                      src={user.image}
+                      alt={user.name}
+                      className="size-9 rounded-full object-cover border border-gray-300"
+                    />
+                  ) : (
+                    <div className="size-9 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold text-lg">
+                      {(user.name || user.id).charAt(0).toUpperCase()}
+                    </div>
+                  )}
+
+                  <span className="font-medium text-[#611f69] text-base">
+                    {user.name || user.id}
+                  </span>
+                </label>
+              );
+            })}
+
+          {/* ACTIONS */}
+          <div className="">
+            <button className="btn btn-secondary" onClick={onClose} disabled={isInviting}>
+              Cancel
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={handleInvite}
+              disabled={!selectedMembers.length || isInviting}
+            >
+              {isInviting ? 'Inviting...' : 'Invite'}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

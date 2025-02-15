@@ -3,8 +3,14 @@ import { useChatContext } from 'stream-chat-react';
 import { XIcon } from 'lucide-react';
 
 const InviteModal = ({ channel, onClose }) => {
-  //
+  // Get the Stream client
   const { client } = useChatContext();
+
+  const [users, setUsers] = useState([]); // List of users
+  const [selectedMembers, setSelectedMembers] = useState([]); // List of selected members
+  const [isLoadingUsers, setIsLoadingUsers] = useState(true); // Flag to indicate if users are being loaded
+  const [error, setError] = useState(''); // Error message
+  const [isInviting, setIsInviting] = useState(false); // Flag to indicate if the members are being invited
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useChatContext } from 'stream-chat-react';
 import { XIcon } from 'lucide-react';
 
@@ -6,42 +7,36 @@ const InviteModal = ({ channel, onClose }) => {
   // Get the Stream client
   const { client } = useChatContext();
 
-  const [users, setUsers] = useState([]); // List of users
   const [selectedMembers, setSelectedMembers] = useState([]); // List of selected members
-  const [isLoadingUsers, setIsLoadingUsers] = useState(true); // Flag to indicate if users are being loaded
-  const [error, setError] = useState(''); // Error message
   const [isInviting, setIsInviting] = useState(false); // Flag to indicate if the members are being invited
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setIsLoadingUsers(true);
-      setError('');
-
-      try {
-        const members = Object.keys(channel.state.members);
-        const res = await client.queryUsers({ id: { $nin: members } }, { name: 1 }, { limit: 30 });
-        setUsers(res.users);
-      } catch (error) {
-        console.log('Error fetching users', error);
-        setError('Failed to load users');
-      } finally {
-        setIsLoadingUsers(false);
-      }
-    };
-
-    fetchUsers();
-  }, [channel, client]);
+  // Use React Query to fetch users
+  const {
+    data: users = [],
+    isLoading: isLoadingUsers,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ['users', channel.id], // Unique key for caching
+    queryFn: async () => {
+      const members = Object.keys(channel.state.members);
+      const res = await client.queryUsers({ id: { $nin: members } }, { name: 1 }, { limit: 30 });
+      return res.users;
+    },
+    enabled: !!channel && !!client, // Only run query when channel and client are available
+    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
+    retry: 2, // Retry failed requests up to 2 times
+  });
 
   const handleInvite = async () => {
-    if (selectedMembers.length === 0) return; // Return if no members are selected
-    setIsInviting(true); // Set inviting state to true
-    setError(''); // Clear error message
+    if (selectedMembers.length === 0) return;
+    setIsInviting(true);
     try {
       await channel.addMembers(selectedMembers);
       onClose();
     } catch (error) {
-      setError('Failed to invite users');
       console.log('Error inviting users:', error);
+      // You might want to handle this error differently
     } finally {
       setIsInviting(false);
     }
@@ -64,7 +59,7 @@ const InviteModal = ({ channel, onClose }) => {
         {/* CONTENT */}
         <div className="">
           {isLoadingUsers && <p>Loading users...</p>}
-          {error && <p className="">{error}</p>}
+          {error && <p className="">Failed to load users</p>}
           {users.length === 0 && !isLoadingUsers && <p>No users found</p>}
 
           {users.length > 0 &&

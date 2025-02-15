@@ -123,6 +123,9 @@ const CreateChannelModal = () => {
 
       // Real-time updates for the channel
       await channel.watch();
+
+      // Set the active channel
+      setActiveChannel(channel);
     } catch (error) {
       console.log('Error creating the channel', error);
     } finally {

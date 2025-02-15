@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router';
 import { useChatContext } from 'stream-chat-react';
 import toast from 'react-hot-toast';
 
-const CreateChannelModal = () => {
+const CreateChannelModal = ({ onClose }) => {
   const [channelName, setChannelName] = useState(''); // Name of the channel
   const [channelType, setChannelType] = useState('public'); // Type of the channel (public or private)
   const [description, setDescription] = useState(''); // Description of the channel
@@ -128,6 +128,9 @@ const CreateChannelModal = () => {
       // Set the active channel
       setActiveChannel(channel);
       toast.success(`Channel "${channelName}" created successfully!`);
+
+      // Close the modal
+      onClose();
     } catch (error) {
       console.log('Error creating the channel', error);
     } finally {

@@ -14,10 +14,11 @@ const InviteModal = ({ channel, onClose }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      setIsLoadingUsers(true); // Set loading state to true
-      setError(''); // Clear error message
+      setIsLoadingUsers(true);
+      setError('');
+
       try {
-        const members = Object.keys(channel.state.members); // Get the members of the channel
+        const members = Object.keys(channel.state.members);
         const res = await client.queryUsers({ id: { $nin: members } }, { name: 1 }, { limit: 30 });
         setUsers(res.users);
       } catch (error) {
@@ -27,6 +28,8 @@ const InviteModal = ({ channel, onClose }) => {
         setIsLoadingUsers(false);
       }
     };
+
+    fetchUsers();
   }, [channel, client]);
 
   const handleInvite = async () => {

@@ -120,6 +120,9 @@ const CreateChannelModal = () => {
 
       // Create the channel
       const channel = client.channel('messaging', channelId, channelData);
+
+      // Real-time updates for the channel
+      await channel.watch();
     } catch (error) {
       console.log('Error creating the channel', error);
     } finally {

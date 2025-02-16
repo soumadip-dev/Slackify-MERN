@@ -306,6 +306,18 @@ const CreateChannelModal = ({ onClose }) => {
           </div>
 
           {/* Actions */}
+          <div className="flex justify-end gap-4 mt-8 pt-6 border-t border-white/10">
+            <button type="button" onClick={onClose} className="btn btn-secondary">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={!channelName.trim() || isCreating}
+              className="btn btn-primary"
+            >
+              {isCreating ? 'Creating...' : 'Create Channel'}
+            </button>
+          </div>
         </form>
       </div>
     </div>

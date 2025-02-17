@@ -106,8 +106,10 @@ const CreateChannelModal = () => {
         members: [client.user.id, ...selectedMembers],
       };
 
+      // Add description to channel data if it exists
       if (description) channelData.description = description;
 
+      // Set channel type (public or private) and visibility
       if (channelType === 'private') {
         channelData.private = true;
         channelData.visibility = 'private';

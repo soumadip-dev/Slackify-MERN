@@ -45,6 +45,7 @@ const HomePage = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(116,58,213,0.15)_0%,transparent_40%)] pointer-events-none"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(74,21,75,0.1)_0%,transparent_40%)] pointer-events-none"></div>
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
+
       <Chat client={chatClient}>
         <div className="max-w-[1400px] mx-auto h-[calc(100vh-4rem)] flex bg-purple-900/20 rounded-3xl backdrop-blur-[25px] border border-purple-500/30 shadow-[0_30px_60px_rgba(0,0,0,0.3),_0_0_100px_rgba(116,58,213,0.1),_inset_0_1px_0_rgba(255,255,255,0.1)] overflow-hidden relative z-10">
           {/* LEFT SIDEBAR */}
@@ -66,17 +67,21 @@ const HomePage = () => {
                   <UserButton />
                 </div>
               </div>
-              {/* CHANNELS LIST */}
+
+              {/* CHANNELS SECTION */}
               <div className="flex-1 overflow-y-auto relative z-1 py-4">
-                <div className="px-5">
+                {/* CREATE CHANNEL BUTTON */}
+                <div className="px-5 mb-4">
                   <button
                     onClick={() => setIsCreateModalOpen(true)}
-                    className="flex items-center gap-2 w-full px-4 py-3 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 transition-all duration-200 text-purple-100 hover:text-white text-sm font-medium border border-purple-400/30 hover:border-purple-400/40"
+                    className="flex items-center gap-2 w-full px-4 py-3 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 transition-all duration-200 text-purple-100 hover:text-white text-sm font-medium border border-purple-400/30 hover:border-purple-400/40 shadow-sm hover:shadow-md"
                   >
                     <PlusIcon className="size-5" />
                     <span>Create Channel</span>
                   </button>
                 </div>
+
+                {/* CHANNEL LIST */}
                 <ChannelList
                   filters={{ members: { $in: [chatClient?.user?.id] } }}
                   options={{ state: true, watch: true }}
@@ -96,7 +101,6 @@ const HomePage = () => {
           <div className="flex-1 bg-gray-50 rounded-r-3xl overflow-hidden flex flex-col">
             <Channel channel={activeChannel}>
               <Window className="h-full flex flex-col">
-                {/* <CustomChannelHeader /> */}
                 <div className="flex-1 overflow-hidden">
                   <MessageList />
                 </div>
@@ -104,11 +108,12 @@ const HomePage = () => {
                   <MessageInput />
                 </div>
               </Window>
-
               <Thread />
             </Channel>
           </div>
         </div>
+
+        {/* CREATE CHANNEL MODAL */}
         {isCreateModalOpen && (
           <CreateChannelModal
             isOpen={isCreateModalOpen}

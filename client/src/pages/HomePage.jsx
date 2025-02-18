@@ -92,6 +92,27 @@ const HomePage = () => {
                       setActiveChannel={channel => setSearchParams({ channel: channel.id })}
                     />
                   )}
+                  List={({ children, loading, error }) => (
+                    <div className="relative z-1">
+                      <div className="px-6 pt-6 pb-3 relative">
+                        <div className="flex items-center gap-[0.75rem] text-white text-2xl font-bold">
+                          <HashIcon className="size-4" />
+                          <span>Channels</span>
+                        </div>
+                      </div>
+                      {loading && <div className="">Loading channels...</div>}
+                      {error && <div className="">Error loading channels</div>}
+
+                      <div className="py-0.5 px-1 pb-1 relative">{children}</div>
+                      <div className="relative pt-6 pb-2 px-6 mt-10 border-t border-gray-200 dark:border-gray-700 ">
+                        <div className="flex items-center gap-3 text-white/90 font-bold text-[0.8rem] uppercase tracking-[0.1em] relative px-3 py-2 bg-white/5 rounded-lg backdrop-blur-md border border-white/10 shadow-[0_2px_10px_rgba(74,21,75,0.2),_inset_0_1px_0_rgba(255,255,255,0.1)]">
+                          <UsersIcon className="size-4" />
+                          <span>Direct Messages</span>
+                        </div>
+                      </div>
+                      {/* <UsersList activeChannel={activeChannel} /> */}
+                    </div>
+                  )}
                 />
               </div>
             </div>

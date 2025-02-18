@@ -16,6 +16,7 @@ import {
 } from 'stream-chat-react';
 import { HashIcon, PlusIcon, UsersIcon } from 'lucide-react';
 import CreateChannelModal from '../components/CreateChannelModal';
+import CustomChannelPreview from '../components/CustomChannelPreview';
 
 const HomePage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Check if model is open or not

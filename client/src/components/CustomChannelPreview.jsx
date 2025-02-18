@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-const CustomChannelPreview = () => {
-  return (
-    <div>CustomChannelPreview</div>
-  )
-}
+const CustomChannelPreview = ({ channel, setActiveChannel, activeChannel }) => {
+  const isActive = activeChannel && activeChannel.id === channel.id;
+  const isDM = channel.data.member_count === 2 && channel.data.id.includes('user_');
 
-export default CustomChannelPreview
+  if (isDM) return null;
+
+  const unreadCount = channel.countUnread();
+};
+
+export default CustomChannelPreview;

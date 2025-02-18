@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { useStreamChat } from '../hooks/useStreamChat';
 import PageLoader from '../components/PageLoader';
+import ErrorDisplay from '../components/ErrorDisplay';
 
 import {
   Chat,
@@ -35,8 +36,7 @@ const HomePage = () => {
     }
   }, [chatClient, searchParams]);
 
-  // todo: handle this with a better component
-  if (error) return <p>Something went wrong...</p>;
+  if (error) return <ErrorDisplay error={error} onRetry={() => window.location.reload()} />;
 
   if (isLoading || !chatClient) return <PageLoader />;
   return (

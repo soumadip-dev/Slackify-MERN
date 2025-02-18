@@ -9,22 +9,26 @@ const CustomChannelPreview = ({ channel, setActiveChannel, activeChannel }) => {
 
   const unreadCount = channel.countUnread();
   return (
-    <button
-      onClick={() => setActiveChannel(channel)}
-      className={`h-[52px] my-1.5 px-4 py-3 rounded-2xl flex items-center justify-start text-left w-full text-white/85 transition-all duration-300 ease-in-out relative backdrop-blur-[15px] border border-white/10 bg-white/5 transition-colors flex items-center w-full text-left px-4 py-2 rounded-lg mb-1 font-medium hover:bg-blue-50/80 min-h-9 ${
-        isActive
-          ? '!bg-black/20 !hover:bg-black/20 border-l-8 border-purple-500 shadow-lg text-blue-900'
-          : ''
-      }`}
-    >
-      <HashIcon className="w-4 h-4 text-[#9b9b9b] mr-2" />
-      <span className="flex-1">{channel.data.id}</span>
-      {unreadCount > 0 && (
-        <span className="flex items-center justify-center ml-2 size-4 text-xs rounded-full bg-red-500 ">
-          {unreadCount}
+    <div className="px-5 py-1">
+      <button
+        onClick={() => setActiveChannel(channel)}
+        className={`w-full text-left px-4 py-3 rounded-xl flex items-center transition-all duration-200 ease-in-out relative ${
+          isActive
+            ? 'bg-purple-600/40 border border-purple-400/30 text-white shadow-lg'
+            : 'text-purple-100/90 hover:bg-purple-500/20 hover:text-white border border-transparent'
+        }`}
+      >
+        <HashIcon className={`w-4 h-4 mr-3 ${isActive ? 'text-white' : 'text-purple-300/70'}`} />
+        <span className="flex-1 truncate font-medium text-sm">
+          {channel.data.name || channel.data.id}
         </span>
-      )}
-    </button>
+        {unreadCount > 0 && (
+          <span className="flex items-center justify-center ml-2 min-w-5 h-5 text-xs rounded-full bg-red-500 text-white px-1">
+            {unreadCount}
+          </span>
+        )}
+      </button>
+    </div>
   );
 };
 

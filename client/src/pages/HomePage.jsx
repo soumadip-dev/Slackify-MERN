@@ -76,6 +76,17 @@ const HomePage = () => {
                     <span>Create Channel</span>
                   </button>
                 </div>
+                <ChannelList
+                  filters={{ members: { $in: [chatClient?.user?.id] } }}
+                  options={{ state: true, watch: true }}
+                  Preview={({ channel }) => (
+                    <CustomChannelPreview
+                      channel={channel}
+                      activeChannel={activeChannel}
+                      setActiveChannel={channel => setSearchParams({ channel: channel.id })}
+                    />
+                  )}
+                />
               </div>
             </div>
           </div>

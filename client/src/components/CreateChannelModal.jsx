@@ -140,13 +140,13 @@ const CreateChannelModal = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[1000]">
-      <div className="bg-gradient-to-br from-[rgba(74,21,75,0.95)] via-[rgba(45,11,46,0.95)] to-[rgba(74,21,75,0.95)] backdrop-blur-xl rounded-3xl w-[560px] max-w-[90vw] max-h-[85vh] overflow-hidden shadow-2xl border border-white/10 relative">
-        <div className="flex items-center justify-between p-6 border-b border-white/10">
+    <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[1000]">
+      <div className="bg-gradient-to-br from-[#2D1B4E] via-[#1E103C] to-[#2D1B4E] backdrop-blur-xl rounded-3xl w-[560px] max-w-[90vw] max-h-[85vh] overflow-hidden shadow-2xl border border-purple-500/20 relative">
+        <div className="flex items-center justify-between p-6 border-b border-purple-400/20">
           <h2 className="text-xl font-semibold text-white">Create a channel</h2>
           <button
             onClick={onClose}
-            className="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-white/15 transition-colors"
+            className="p-2 rounded-lg bg-purple-500/20 border border-purple-400/30 text-white hover:bg-purple-500/30 transition-colors"
           >
             <XIcon className="w-5 h-5" />
           </button>
@@ -154,7 +154,7 @@ const CreateChannelModal = ({ onClose }) => {
 
         <form onSubmit={handleSubmit} className="p-6 max-h-[calc(85vh-80px)] overflow-y-auto">
           {error && (
-            <div className="flex items-center gap-2 p-3 mb-4 bg-red-500/15 border border-red-500/30 rounded-xl text-red-200 text-sm">
+            <div className="flex items-center gap-2 p-3 mb-4 bg-red-500/20 border border-red-400/40 rounded-xl text-red-100 text-sm">
               <AlertCircleIcon className="w-4 h-4" />
               <span>{error}</span>
             </div>
@@ -162,22 +162,22 @@ const CreateChannelModal = ({ onClose }) => {
 
           <div className="mb-6">
             <div className="relative">
-              <HashIcon className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-white/60" />
+              <HashIcon className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-purple-300/80" />
               <input
                 id="channelName"
                 type="text"
                 value={channelName}
                 onChange={handleChannelNameChange}
                 placeholder="e.g. marketing"
-                className={`w-full pl-10 pr-4 py-3 border rounded-xl text-white/95 bg-white/8 backdrop-blur-sm placeholder:text-white/40 ${
-                  error ? 'border-red-500/60' : 'border-white/15'
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-xl text-white bg-purple-900/30 backdrop-blur-sm placeholder:text-purple-200/50 ${
+                  error ? 'border-red-400/60' : 'border-purple-400/30'
+                } focus:outline-none focus:ring-2 focus:ring-purple-500/50`}
                 autoFocus
                 maxLength={22}
               />
             </div>
             {channelName && (
-              <div className="text-xs text-white/60 mt-2 font-mono bg-white/5 py-2 px-3 rounded-lg border-l-4 border-l-purple-500/50">
+              <div className="text-xs text-purple-200/80 mt-2 font-mono bg-purple-900/30 py-2 px-3 rounded-lg border-l-4 border-l-purple-500">
                 Channel ID will be: #
                 {channelName
                   .toLowerCase()
@@ -188,9 +188,9 @@ const CreateChannelModal = ({ onClose }) => {
           </div>
 
           <div className="mb-6">
-            <label className="block text-white/80 text-sm mb-2">Channel type</label>
+            <label className="block text-purple-100 text-sm mb-2">Channel type</label>
             <div className="grid grid-cols-2 gap-3">
-              <label className="flex flex-col p-4 border border-white/15 rounded-xl cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
+              <label className="flex flex-col p-4 border border-purple-400/30 rounded-xl cursor-pointer bg-purple-900/20 hover:bg-purple-800/30 transition-colors">
                 <div className="flex items-center gap-3 mb-2">
                   <input
                     type="radio"
@@ -199,13 +199,13 @@ const CreateChannelModal = ({ onClose }) => {
                     onChange={e => setChannelType(e.target.value)}
                     className="accent-purple-500"
                   />
-                  <HashIcon className="w-4 h-4 text-white/80" />
+                  <HashIcon className="w-4 h-4 text-purple-300" />
                   <span className="font-medium text-white">Public</span>
                 </div>
-                <p className="text-xs text-white/60">Anyone can join this channel</p>
+                <p className="text-xs text-purple-200/70">Anyone can join this channel</p>
               </label>
 
-              <label className="flex flex-col p-4 border border-white/15 rounded-xl cursor-pointer bg-white/5 hover:bg-white/10 transition-colors">
+              <label className="flex flex-col p-4 border border-purple-400/30 rounded-xl cursor-pointer bg-purple-900/20 hover:bg-purple-800/30 transition-colors">
                 <div className="flex items-center gap-3 mb-2">
                   <input
                     type="radio"
@@ -214,41 +214,41 @@ const CreateChannelModal = ({ onClose }) => {
                     onChange={e => setChannelType(e.target.value)}
                     className="accent-purple-500"
                   />
-                  <LockIcon className="w-4 h-4 text-white/80" />
+                  <LockIcon className="w-4 h-4 text-purple-300" />
                   <span className="font-medium text-white">Private</span>
                 </div>
-                <p className="text-xs text-white/60">Only invited members can join</p>
+                <p className="text-xs text-purple-200/70">Only invited members can join</p>
               </label>
             </div>
           </div>
 
           {channelType === 'private' && (
             <div className="mb-6">
-              <label className="block text-white/80 text-sm mb-2">Add members</label>
+              <label className="block text-purple-100 text-sm mb-2">Add members</label>
               <div className="flex items-center gap-3 mb-3">
                 <button
                   type="button"
                   onClick={() => setSelectedMembers(users.map(u => u.id))}
                   disabled={loadingUsers || users.length === 0}
-                  className="flex items-center gap-2 px-3 py-2 text-sm bg-white/10 border border-white/15 rounded-lg text-white/90 hover:bg-white/15 transition-colors disabled:opacity-50"
+                  className="flex items-center gap-2 px-3 py-2 text-sm bg-purple-900/30 border border-purple-400/30 rounded-lg text-purple-100 hover:bg-purple-800/40 transition-colors disabled:opacity-50"
                 >
                   <UsersIcon className="w-4 h-4" />
                   Select Everyone
                 </button>
-                <span className="text-sm text-white/70 bg-white/10 py-2 px-3 rounded-lg">
+                <span className="text-sm text-purple-100 bg-purple-900/30 py-2 px-3 rounded-lg">
                   {selectedMembers.length} selected
                 </span>
               </div>
-              <div className="max-h-48 overflow-y-auto border border-white/15 rounded-xl p-3 bg-white/5 space-y-2">
+              <div className="max-h-48 overflow-y-auto border border-purple-400/30 rounded-xl p-3 bg-purple-900/20 space-y-2">
                 {loadingUsers ? (
-                  <p className="text-white/60 text-center py-4">Loading users...</p>
+                  <p className="text-purple-200/70 text-center py-4">Loading users...</p>
                 ) : users.length === 0 ? (
-                  <p className="text-white/60 text-center py-4">No users found</p>
+                  <p className="text-purple-200/70 text-center py-4">No users found</p>
                 ) : (
                   users.map(user => (
                     <label
                       key={user.id}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-purple-800/30 transition-colors cursor-pointer"
                     >
                       <input
                         type="checkbox"
@@ -260,16 +260,14 @@ const CreateChannelModal = ({ onClose }) => {
                         <img
                           src={user.image}
                           alt={user.name || user.id}
-                          className="w-8 h-8 rounded-full border-2 border-white/20"
+                          className="w-8 h-8 rounded-full border-2 border-purple-400/30"
                         />
                       ) : (
-                        <div className="w-8 h-8 rounded-full border-2 border-white/20 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-semibold text-sm">
+                        <div className="w-8 h-8 rounded-full border-2 border-purple-400/30 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-semibold text-sm">
                           {(user.name || user.id).charAt(0).toUpperCase()}
                         </div>
                       )}
-                      <span className="text-white/90 font-medium text-sm">
-                        {user.name || user.id}
-                      </span>
+                      <span className="text-white font-medium text-sm">{user.name || user.id}</span>
                     </label>
                   ))
                 )}
@@ -278,7 +276,7 @@ const CreateChannelModal = ({ onClose }) => {
           )}
 
           <div className="mb-6">
-            <label htmlFor="description" className="block text-white/80 text-sm mb-2">
+            <label htmlFor="description" className="block text-purple-100 text-sm mb-2">
               Description (optional)
             </label>
             <textarea
@@ -286,23 +284,23 @@ const CreateChannelModal = ({ onClose }) => {
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="What's this channel about?"
-              className="w-full p-3 border border-white/15 rounded-xl text-white/95 bg-white/8 placeholder:text-white/40 resize-none"
+              className="w-full p-3 border border-purple-400/30 rounded-xl text-white bg-purple-900/30 placeholder:text-purple-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               rows={3}
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-purple-400/20">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-white/80 hover:text-white transition-colors"
+              className="px-4 py-2 text-purple-200 hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!channelName.trim() || isCreating}
-              className="px-6 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2 bg-purple-500 text-white rounded-xl hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
               {isCreating ? 'Creating...' : 'Create Channel'}
             </button>

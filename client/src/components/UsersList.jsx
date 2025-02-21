@@ -1,9 +1,10 @@
-import React from 'react'
+import { useSearchParams } from 'react-router';
+import { useChatContext } from 'stream-chat-react';
 
 const UsersList = () => {
-  return (
-    <div>UsersList</div>
-  )
-}
+  const { client } = useChatContext();
+  const [_, setSearchParams] = useSearchParams();
+  return <div>UsersList</div>;
+};
 
-export default UsersList
+export default UsersList;

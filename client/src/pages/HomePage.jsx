@@ -19,6 +19,7 @@ import CreateChannelModal from '../components/CreateChannelModal';
 import CustomChannelPreview from '../components/CustomChannelPreview';
 import ChannelLoadingState from '../components/ChannelLoadingState';
 import ChannelErrorState from '../components/ChannelErrorState';
+import UsersList from '../components/UsersList';
 
 const HomePage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Check if model is open or not
@@ -113,6 +114,7 @@ const HomePage = () => {
                           <span>Direct Messages</span>
                         </div>
                       </div>
+                      <UsersList activeChannel={activeChannel} />
                     </div>
                   )}
                 />

@@ -17,6 +17,8 @@ import {
 import { HashIcon, PlusIcon, UsersIcon } from 'lucide-react';
 import CreateChannelModal from '../components/CreateChannelModal';
 import CustomChannelPreview from '../components/CustomChannelPreview';
+import ChannelLoadingState from '../components/ChannelLoadingState';
+import ChannelErrorState from '../components/ChannelErrorState';
 
 const HomePage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Check if model is open or not
@@ -100,12 +102,8 @@ const HomePage = () => {
                           <span>Channels</span>
                         </div>
                       </div>
-                      {loading && (
-                        <div className="px-5 py-2 text-purple-200 text-sm">Loading channels...</div>
-                      )}
-                      {error && (
-                        <div className="px-5 py-2 text-red-300 text-sm">Error loading channels</div>
-                      )}
+                      {loading && <ChannelLoadingState />}
+                      {error && <ChannelErrorState />}
 
                       <div className="py-0.5 px-1 pb-1 relative">{children}</div>
 

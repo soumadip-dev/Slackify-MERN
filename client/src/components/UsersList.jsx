@@ -31,7 +31,7 @@ const UsersList = ({ activeChannel }) => {
     queryKey: ['users-list', client?.user?.id], // Unique key for caching the users
     queryFn: fetchUsers,
     enabled: !!client?.user, // Run query only if client and user are available
-    staleTime: 1000 * 60 * 5, // 5 mins
+    staleTime: 1000 * 60 * 5, // tells React Query the data is "fresh" for 5 minutes, during these 5 minutes, React Query will not refetch the data automatically
   });
 
   return <div>UsersList</div>;

@@ -16,7 +16,7 @@
   <img src="./client/public/SS_README.png" alt="Slackify screenshot" width="900">
 </div>
 
-<p align="center">🚧 Currently Building 🚧</p>
+<p align="center">✨ Frontend in progress ✨</p>
 
 ## 🌟 Features
 

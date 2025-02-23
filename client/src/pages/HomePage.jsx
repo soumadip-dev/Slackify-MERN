@@ -107,11 +107,12 @@ const HomePage = () => {
                       {error && <ChannelErrorState />}
 
                       <div className="py-0.5 px-1 pb-1 relative">{children}</div>
-
-                      <div className="relative pt-5 pb-2 px-5 mt-8 border-t border-purple-400/20">
-                        <div className="flex items-center gap-2 text-white/90 font-bold text-xs uppercase tracking-wider relative px-3 py-2 bg-white/5 rounded-lg backdrop-blur-md border border-white/10 shadow-[0_2px_10px_rgba(74,21,75,0.2),_inset_0_1px_0_rgba(255,255,255,0.1)]">
-                          <UsersIcon className="size-3.5" />
-                          <span>Direct Messages</span>
+                      <div className="relative pt-5 pb-2 mt-8 border-t border-purple-400/20">
+                        <div className="px-5 pt-5 pb-2 relative">
+                          <div className="flex items-center gap-2 text-white text-xl font-bold">
+                            <UsersIcon className="size-4" />
+                            <span>Direct Messages</span>
+                          </div>
                         </div>
                       </div>
                       <UsersList activeChannel={activeChannel} />

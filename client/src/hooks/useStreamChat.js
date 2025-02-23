@@ -6,7 +6,7 @@ import { getStreamToken } from '../lib/api';
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
-export const useStramChat = () => {
+export const useStreamChat = () => {
   const { user } = useUser();
   const [chatClient, setChatClient] = useState(null);
 

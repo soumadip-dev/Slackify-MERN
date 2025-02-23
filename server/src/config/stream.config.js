@@ -34,3 +34,12 @@ export const generateStreamToken = userId => {
     return null;
   }
 };
+
+//* Function to add a user to public channels
+export const addUserToPublicChannels = async newUserId => {
+  const publicChannels = await streamClient.queryChannels({ discoverable: true });
+
+  for (const channel of publicChannels) {
+    await channel.addMembers([newUserId]);
+  }
+};

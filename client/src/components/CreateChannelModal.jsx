@@ -117,7 +117,7 @@ const CreateChannelModal = ({ onClose }) => {
         channelData.visibility = 'private';
       } else {
         channelData.visibility = 'public';
-        channelData.discoverable = true; // Custom property to make the channel discoverable for later use
+        channelData.discoverable = true; // Custom property to make the channel discoverable
       }
 
       // Create the channel

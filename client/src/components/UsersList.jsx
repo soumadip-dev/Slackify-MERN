@@ -34,6 +34,24 @@ const UsersList = ({ activeChannel }) => {
     staleTime: 1000 * 60 * 5, // tells React Query the data is "fresh" for 5 minutes, during these 5 minutes, React Query will not refetch the data automatically
   });
 
+  if (isLoading)
+    return (
+      <div className="px-4 py-3 text-sm text-center text-purple-200/80 bg-purple-500/10 rounded-lg border border-purple-400/20 backdrop-blur-sm mx-3 my-1">
+        Loading users...
+      </div>
+    );
+  if (isError)
+    return (
+      <div className="px-4 py-3 text-sm text-center text-red-200/90 bg-red-500/10 rounded-lg border border-red-400/20 backdrop-blur-sm mx-3 my-1">
+        Failed to load users
+      </div>
+    );
+  if (!users.length)
+    return (
+      <div className="px-4 py-3 text-sm text-center text-purple-200/80 bg-purple-500/10 rounded-lg border border-purple-400/20 backdrop-blur-sm mx-3 my-1">
+        No other users found
+      </div>
+    );
   return <div>UsersList</div>;
 };
 

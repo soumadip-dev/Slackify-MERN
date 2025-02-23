@@ -85,7 +85,7 @@ const UsersList = ({ activeChannel }) => {
       </div>
     );
   return (
-    <div className="px-1 py-0.5">
+    <div className="px-5 py-1 space-y-4">
       {users.map(user => {
         const channelId = [client.user.id, user.id].sort().join('-').slice(0, 64);
         const channel = client.channel('messaging', channelId, {

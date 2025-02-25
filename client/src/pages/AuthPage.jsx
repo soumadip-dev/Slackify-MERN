@@ -1,3 +1,5 @@
+import { SignInButton } from '@clerk/clerk-react';
+
 const AuthPage = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-[#0f0a1f] via-[#1a1b3f] to-[#2d3a6b] overflow-hidden relative">
@@ -52,9 +54,11 @@ const AuthPage = () => {
           </div>
 
           <div className="flex flex-col gap-4">
-            <button className="w-full bg-gradient-to-r from-[#7e22ce] to-[#6b21a8] text-white font-semibold py-4 px-6 rounded-xl border border-[rgba(255,255,255,0.1)] hover:brightness-110 transition-all text-base shadow-lg hover:shadow-xl">
-              Get Started
-            </button>
+            <SignInButton mode="modal">
+              <button className="w-full bg-gradient-to-r from-[#7e22ce] to-[#6b21a8] text-white font-semibold py-4 px-6 rounded-xl border border-[rgba(255,255,255,0.1)] hover:brightness-110 transition-all text-base shadow-lg hover:shadow-xl">
+                Get Started
+              </button>
+            </SignInButton>
           </div>
         </div>
       </div>

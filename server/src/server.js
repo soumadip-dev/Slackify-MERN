@@ -1,4 +1,4 @@
-import { ENV } from '../config/env.config.js';
+import { ENV } from './config/env.config.js';
 import app from './App.js';
 
 const PORT = ENV.PORT || 8080;

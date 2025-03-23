@@ -1,19 +1,38 @@
 {
-  "name": "server",
+  "name": "slack-clone-server",
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "slack-clone",
+    "mern-stack",
+    "chat-app",
+    "real-time-chat",
+    "messaging-app",
+    "team-collaboration",
+    "express",
+    "mongodb",
+    "mongoose",
+    "socket-io",
+    "clerk-auth"
+  ],
+  "author": "Soumadip Majila",
   "license": "ISC",
-  "description": "",
+  "description": "Backend server for a Slack clone built with MERN stack, supporting real-time messaging, authentication, and team collaboration features.",
   "dependencies": {
+    "@clerk/express": "^1.7.4",
+    "@sentry/node": "^10.1.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "mongoose": "^8.18.0"
+    "inngest": "^3.40.1",
+    "mongoose": "^8.18.0",
+    "stream-chat": "^8.60.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

@@ -5,3 +5,19 @@ import { useQuery } from '@tanstack/react-query';
 import { getStreamToken } from '../lib/api';
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
+
+export const useStramChat = () => {
+  const { user } = useUser();
+  const [chatClient, setChatClient] = useState(null);
+
+  //  Feth the stream token for the current user
+  const {
+    data: tokenData,
+    isLoading: tokenLoading,
+    error: tokenError,
+  } = useQuery({
+    queryKey: ['stream-token'],
+    queryFn: getStreamToken,
+    enabled: !!user?.id, // this will take the value and converted to boolean
+  });
+};

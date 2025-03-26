@@ -27,11 +27,14 @@ export const useStreamChat = () => {
       if (!tokenData?.token || !user.id || !STREAM_API_KEY) return;
       try {
         const client = StreamChat.getInstance(STREAM_API_KEY);
-        await client.connectUser({
-          id: user.id,
-          name: user.fullName,
-          image: user.imageUrl,
-        });
+        await client.connectUser(
+          {
+            id: user.id,
+            name: user.fullName,
+            image: user.imageUrl,
+          },
+          tokenData.token
+        );
         setChatClient(client);
       } catch (error) {
         console.error('Error connecting to stream', error);

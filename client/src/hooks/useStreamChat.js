@@ -20,4 +20,14 @@ export const useStramChat = () => {
     queryFn: getStreamToken,
     enabled: !!user?.id, // this will take the value and converted to boolean
   });
+
+  // Initialize the StreamChat client
+  useEffect(() => {
+    if (!tokenData?.token || !user.id || !STREAM_API_KEY) return;
+    try {
+      const client = StreamChat.getInstance(STREAM_API_KEY);
+    } catch (error) {
+      console.error('Error connecting to stream', error);
+    }
+  });
 };

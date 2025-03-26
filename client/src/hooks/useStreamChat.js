@@ -37,5 +37,5 @@ export const useStramChat = () => {
         console.error('Error connecting to stream', error);
       }
     };
-  }, []);
+  }, [tokenData?.token, user?.id]);
 };

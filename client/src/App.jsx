@@ -20,7 +20,7 @@ const App = () => {
         element={!isSignedIn ? <AuthPage /> : <Navigate to={'/'} replace />} // Show AuthPage if not signed in, else redirect to /
       />
       <Route
-        path="/call"
+        path="/call/:id"
         element={isSignedIn ? <CallPage /> : <Navigate to={'/auth'} replace />} // Show CallPage if signed in, else redirect to /auth
       />
       <Route

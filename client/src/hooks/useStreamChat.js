@@ -23,11 +23,19 @@ export const useStramChat = () => {
 
   // Initialize the StreamChat client
   useEffect(() => {
-    if (!tokenData?.token || !user.id || !STREAM_API_KEY) return;
-    try {
-      const client = StreamChat.getInstance(STREAM_API_KEY);
-    } catch (error) {
-      console.error('Error connecting to stream', error);
-    }
-  });
+    const initChat = async () => {
+      if (!tokenData?.token || !user.id || !STREAM_API_KEY) return;
+      try {
+        const client = StreamChat.getInstance(STREAM_API_KEY);
+        await client.connectUser({
+          id: user.id,
+          name: user.fullName,
+          image: user.imageUrl,
+        });
+        setChatClient(client);
+      } catch (error) {
+        console.error('Error connecting to stream', error);
+      }
+    };
+  }, []);
 };

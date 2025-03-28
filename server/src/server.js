@@ -8,12 +8,14 @@ const PORT = ENV.PORT || 8080;
 const startServer = async () => {
   try {
     await connectDb();
-    app.listen(PORT, () => {
-      console.info(`✔️ Server is up and running on port: ${PORT}`);
-    });
+    if (ENV.NODE_ENV !== 'production') {
+      app.listen(PORT, () => {
+        console.info(`✔️ Server is up and running on port: ${PORT}`);
+      });
+    }
   } catch (error) {
     console.error('❌ Failed to start server:', error.message);
-    process.exit(1);
+    process.exit(1); // Exit the process with a failure code
   }
 };
 

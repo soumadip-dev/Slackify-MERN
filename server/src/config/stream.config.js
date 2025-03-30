@@ -13,3 +13,13 @@ export const upsertStreamUser = async userData => {
     console.log('Error upserting Stream user:', error);
   }
 };
+
+//* Function to delete a user from Stream
+export const deleteStreamUser = async userId => {
+  try {
+    await streamClient.deleteUser(userId);
+    console.log('Stream user deleted successfully:', userId);
+  } catch (error) {
+    console.error('Error deleting Stream user:', error);
+  }
+};

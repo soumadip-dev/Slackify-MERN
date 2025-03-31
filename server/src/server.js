@@ -5,6 +5,7 @@ import { serve } from 'inngest/express';
 import { inngest, functions } from './config/inngest.config.js';
 import { ENV } from './config/env.config.js';
 import { connectDb } from './config/db.config.js';
+import chatRoutes from './routes/chat.route.js';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 
 //* Routes
 app.use('/api/inngest', serve({ client: inngest, functions }));
+app.use('/api/chat', chatRoutes);
 
 const PORT = ENV.PORT || 8080;
 

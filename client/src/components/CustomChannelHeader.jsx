@@ -15,6 +15,11 @@ const CustomChannelHeader = () => {
   // Get the member count of the channel
   const memberCount = Object.keys(channel.state.members).length;
 
+  const [showInvite, setShowInvite] = useState(false); // Flag to show/hide the invite modal
+  const [showMembers, setShowMembers] = useState(false); // Flag to show/hide the members modal
+  const [showPinnedMessages, setShowPinnedMessages] = useState(false); // Flag to show/hide the pinned messages modal
+  const [pinnedMessages, setPinnedMessages] = useState([]); // Array of pinned messages
+
   return (
     <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
       <div className="flex items-center gap-3">

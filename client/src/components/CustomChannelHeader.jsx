@@ -7,6 +7,10 @@ import PinnedMessagesModal from './PinnedMessagesModal';
 import InviteModal from './InviteModal';
 
 const CustomChannelHeader = () => {
+  const { channel } = useChannelStateContext();
+  const { user } = useUser();
+
+  const memberCount = Object.keys(channel.state.members).length;
   return (
     <div className="h-14 border-b border-gray-200 flex items-center px-4 justify-between bg-white">
       <div className="flex items-center gap-3">

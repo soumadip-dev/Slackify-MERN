@@ -13,59 +13,62 @@ It also handles disconnection when the user leaves the page.
 */
 
 export const useStreamChat = () => {
-  // Get the user from Clerk
+  // Get the current logged-in user from Clerk
   const { user } = useUser();
 
-  // Initialize state for the StreamChat client
+  // Local state to store the StreamChat client instance
   const [chatClient, setChatClient] = useState(null);
 
-  // Fetch the stream token for the current user
+  // Fetch the Stream token for the current user using React Query
   const {
     data: tokenData,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['streamToken'],
-    queryFn: getStreamToken,
-    enabled: !!user?.id, // Converts user ID to a boolean to enable the query
+    queryKey: ['streamToken'], // Unique key for caching the token
+    queryFn: getStreamToken, // API call function
+    enabled: !!user?.id, // Run query only if user is logged in
   });
 
-  // Initialize the StreamChat client and connect the user
+  // Setup and teardown of StreamChat client
   useEffect(() => {
+    // Don't proceed if any required data is missing
     if (!tokenData?.token || !user?.id || !STREAM_API_KEY) return;
 
+    // Create a StreamChat client instance
     const client = StreamChat.getInstance(STREAM_API_KEY);
-    let cancelled = false;
 
+    // Flag to prevent state updates on unmounted component
+    let cancelled = false; // Prevents state updates if component unmounts before async call finishes
+
+    // Async function to connect the user to Stream
     const connect = async () => {
       try {
-        // Connect the user to StreamChat
         await client.connectUser(
           {
-            id: user.id,
+            id: user.id, // Unique identifier for the user
             name:
-              user.fullName ?? user.username ?? user.primaryEmailAddress?.emailAddress ?? user.id,
-            image: user.imageUrl ?? undefined,
+              user.fullName ?? user.username ?? user.primaryEmailAddress?.emailAddress ?? user.id, // Fallback options for display name
+            image: user.imageUrl ?? undefined, // User profile image if available
           },
-          tokenData.token
+          tokenData.token // Authentication token for Stream
         );
         if (!cancelled) {
-          setChatClient(client); // Update the state
+          setChatClient(client); // Save the client in state if still mounted
         }
       } catch (error) {
-        // Handle any errors
         console.error('Error connecting to Stream', error);
       }
     };
     connect();
 
-    // Cleanup
+    // Cleanup when component unmounts or dependencies change
     return () => {
-      cancelled = true;
-      if (client) client.disconnectUser(); // Disconnect the user when the component unmounts
+      cancelled = true; // Prevents state updates after unmount
+      if (client) client.disconnectUser(); // Safely disconnect the Stream client
     };
   }, [tokenData?.token, user?.id]);
 
-  // Return the chat client, loading state, and error
+  // Expose the chat client, loading state, and error for consumers of this hook
   return { chatClient, isLoading, error };
 };

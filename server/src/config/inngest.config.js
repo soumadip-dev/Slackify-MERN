@@ -1,11 +1,12 @@
 import { Inngest } from 'inngest';
 import { connectDb } from './db.config.js';
 import { User } from '../models/user.models.js';
+import { deleteStreamUser, upsertStreamUser } from './stream.config.js';
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: 'slackify' });
 
-// Create a function
+// Create a function to
 const syncUser = inngest.createFunction(
   { id: 'sync-user' },
   { event: 'clerk/user.created' },
@@ -24,7 +25,11 @@ const syncUser = inngest.createFunction(
     };
     await User.create(newUser);
 
-    //TODO: Do More things here
+    await upsertStreamUser({
+      id: newUser.clerkId.toString(),
+      name: newUser.name,
+      image: newUser.image,
+    });
   }
 );
 
@@ -36,7 +41,7 @@ const deleteUserFromDB = inngest.createFunction(
     const { id } = event.data;
     await User.deleteOne({ clerkId: id });
 
-    //TODO: Do More things here
+    await deleteStreamUser(id.toString());
   }
 );
 

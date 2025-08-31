@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  💬 Slack Clone (MERN + Socket.io) ⚡
+  💬 Slackify (MERN) ⚡
   <br>
 </h1>
 

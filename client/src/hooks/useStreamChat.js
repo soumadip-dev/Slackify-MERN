@@ -38,5 +38,12 @@ export const useStramChat = () => {
       }
     };
     initChat();
+
+    // cleanup
+    return () => {
+      if (chatClient) chatClient.disconnectUser();
+    };
   }, [tokenData?.token, user?.id]);
+
+  return { chatClient, isLoading: tokenLoading, error: tokenError };
 };

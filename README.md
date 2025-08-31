@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  💬 Slack Clone (MERN + Socket.io) ⚡
+  💬 Slackify (MERN) ⚡
   <br>
 </h1>
 
@@ -13,10 +13,10 @@
 </p>
 
 <div align="center">
-  <img src="./client/public/SS_for _README.png" alt="Slackify screenshot" width="900">
+  <img src="./client/public/SS_README.png" alt="Slackify screenshot" width="900">
 </div>
 
-<p align="center">🚧 Currently Building 🚧</p>
+<p align="center">✨ Frontend in progress ✨</p>
 
 ## 🌟 Features
 

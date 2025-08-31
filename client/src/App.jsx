@@ -3,9 +3,11 @@ import { Navigate, Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import CallPage from './pages/CallPage';
+import toast from 'react-hot-toast';
 const App = () => {
   return (
     <>
+      <button onClick={() => toast.success('success')}>success</button>
       <SignedIn>
         <Routes>
           <Route path="/" element={<HomePage />} />

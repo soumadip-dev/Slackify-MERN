@@ -2,6 +2,7 @@ import { UserButton } from '@clerk/clerk-react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { useStreamChat } from '../hooks/useStreamChat';
+import PageLoader from '../components/PageLoader';
 
 const HomePage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Check if model is open or not
@@ -25,6 +26,7 @@ const HomePage = () => {
   // todo: handle this with a better component
   if (error) return <p>Something went wrong...</p>;
 
+  if (isLoading || !chatClient) return <PageLoader />;
   return (
     <div>
       <p>Home Page</p>

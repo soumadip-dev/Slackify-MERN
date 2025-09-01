@@ -6,18 +6,20 @@ import { getStreamToken } from '../lib/api';
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
-// this hook is used to connect the current user to the Stream Chat API
-// so that users can see each other's messages, send messages to each other, get realtime updates, etc.
-// it also handles  the disconnection when the user leaves the page
+/* This hook connects the current user to the Stream Chat API,
+allowing users to see each other's messages, send messages,
+and receive real-time updates.
+It also handles disconnection when the user leaves the page.
+*/
 
 export const useStreamChat = () => {
-  // get the user from Clerk
+  // Get the user from Clerk
   const { user } = useUser();
 
-  // Initialize the state for the StreamChat client
+  // Initialize state for the StreamChat client
   const [chatClient, setChatClient] = useState(null);
 
-  //  Fetch the stream token for the current user
+  // Fetch the stream token for the current user
   const {
     data: tokenData,
     isLoading: tokenLoading,
@@ -25,7 +27,7 @@ export const useStreamChat = () => {
   } = useQuery({
     queryKey: ['stream-token'],
     queryFn: getStreamToken,
-    enabled: !!user?.id, // this will take the value and converted to boolean
+    enabled: !!user?.id, // Converts user ID to a boolean to enable the query
   });
 
   // Initialize the StreamChat client and connect the user
@@ -34,7 +36,7 @@ export const useStreamChat = () => {
       if (!tokenData?.token || !user.id || !STREAM_API_KEY) return;
       try {
         const client = StreamChat.getInstance(STREAM_API_KEY);
-        // connect the user to the StreamChat
+        // Connect the user to StreamChat
         await client.connectUser(
           {
             id: user.id,
@@ -43,20 +45,20 @@ export const useStreamChat = () => {
           },
           tokenData.token
         );
-        setChatClient(client); // update the state
+        setChatClient(client); // Update the state
       } catch (error) {
-        // handle the error
-        console.error('Error connecting to stream', error);
+        // Handle any errors
+        console.error('Error connecting to Stream', error);
       }
     };
     initChat();
 
-    // cleanup
+    // Cleanup
     return () => {
-      if (chatClient) chatClient.disconnectUser(); // disconnect the user if the component is unmounted to handle online-offline functionality
+      if (chatClient) chatClient.disconnectUser(); // Disconnect the user when the component unmounts
     };
   }, [tokenData?.token, user?.id, chatClient]);
 
-  // Return the chat client and loading state and error
+  // Return the chat client, loading state, and error
   return { chatClient, isLoading: tokenLoading, error: tokenError };
 };

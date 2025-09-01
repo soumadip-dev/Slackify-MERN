@@ -22,43 +22,50 @@ export const useStreamChat = () => {
   // Fetch the stream token for the current user
   const {
     data: tokenData,
-    isLoading: tokenLoading,
-    error: tokenError,
+    isLoading,
+    error,
   } = useQuery({
-    queryKey: ['stream-token'],
+    queryKey: ['streamToken'],
     queryFn: getStreamToken,
     enabled: !!user?.id, // Converts user ID to a boolean to enable the query
   });
 
   // Initialize the StreamChat client and connect the user
   useEffect(() => {
-    const initChat = async () => {
-      if (!tokenData?.token || !user.id || !STREAM_API_KEY) return;
+    if (!tokenData?.token || !user?.id || !STREAM_API_KEY) return;
+
+    const client = StreamChat.getInstance(STREAM_API_KEY);
+    let cancelled = false;
+
+    const connect = async () => {
       try {
-        const client = StreamChat.getInstance(STREAM_API_KEY);
         // Connect the user to StreamChat
         await client.connectUser(
           {
             id: user.id,
-            name: user.fullName,
-            image: user.imageUrl,
+            name:
+              user.fullName ?? user.username ?? user.primaryEmailAddress?.emailAddress ?? user.id,
+            image: user.imageUrl ?? undefined,
           },
           tokenData.token
         );
-        setChatClient(client); // Update the state
+        if (!cancelled) {
+          setChatClient(client); // Update the state
+        }
       } catch (error) {
         // Handle any errors
         console.error('Error connecting to Stream', error);
       }
     };
-    initChat();
+    connect();
 
     // Cleanup
     return () => {
-      if (chatClient) chatClient.disconnectUser(); // Disconnect the user when the component unmounts
+      cancelled = true;
+      if (client) client.disconnectUser(); // Disconnect the user when the component unmounts
     };
-  }, [tokenData?.token, user?.id, chatClient]);
+  }, [tokenData?.token, user?.id]);
 
   // Return the chat client, loading state, and error
-  return { chatClient, isLoading: tokenLoading, error: tokenError };
+  return { chatClient, isLoading, error };
 };

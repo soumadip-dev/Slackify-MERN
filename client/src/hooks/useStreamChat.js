@@ -11,10 +11,13 @@ const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 // it also handles  the disconnection when the user leaves the page
 
 export const useStreamChat = () => {
+  // get the user from Clerk
   const { user } = useUser();
+
+  // Initialize the state for the StreamChat client
   const [chatClient, setChatClient] = useState(null);
 
-  //  Feth the stream token for the current user
+  //  Fetch the stream token for the current user
   const {
     data: tokenData,
     isLoading: tokenLoading,
@@ -31,6 +34,7 @@ export const useStreamChat = () => {
       if (!tokenData?.token || !user.id || !STREAM_API_KEY) return;
       try {
         const client = StreamChat.getInstance(STREAM_API_KEY);
+        // connect the user to the StreamChat
         await client.connectUser(
           {
             id: user.id,
@@ -39,8 +43,9 @@ export const useStreamChat = () => {
           },
           tokenData.token
         );
-        setChatClient(client);
+        setChatClient(client); // update the state
       } catch (error) {
+        // handle the error
         console.error('Error connecting to stream', error);
       }
     };
@@ -48,9 +53,10 @@ export const useStreamChat = () => {
 
     // cleanup
     return () => {
-      if (chatClient) chatClient.disconnectUser();
+      if (chatClient) chatClient.disconnectUser(); // disconnect the user if the component is unmounted to handle online-offline functionality
     };
-  }, [tokenData?.token, user?.id]);
+  }, [tokenData?.token, user?.id, chatClient]);
 
+  // Return the chat client and loading state and error
   return { chatClient, isLoading: tokenLoading, error: tokenError };
 };

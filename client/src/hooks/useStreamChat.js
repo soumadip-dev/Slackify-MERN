@@ -6,6 +6,10 @@ import { getStreamToken } from '../lib/api';
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 
+// this hook is used to connect the current user to the Stream Chat API
+// so that users can see each other's messages, send messages to each other, get realtime updates, etc.
+// it also handles  the disconnection when the user leaves the page
+
 export const useStreamChat = () => {
   const { user } = useUser();
   const [chatClient, setChatClient] = useState(null);

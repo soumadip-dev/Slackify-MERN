@@ -38,6 +38,37 @@ const CallPage = () => {
     enabled: !!user, // '!!' convert to boolean
   });
 
+  useEffect(() => {
+    const initCall = async () => {
+      if (!tokenData.token || !user || !callId) return; // Return if any required data is missing
+
+      try {
+        const videoClient = new StreamVideoClient({
+          apiKey: STREAM_API_KEY,
+          user: {
+            id: user.id,
+            name: user.fullName,
+            image: user.imageUrl,
+          },
+          token: tokenData.token,
+        });
+
+        const callInstance = videoClient.call('default', callId);
+        await callInstance.join({ create: true }); // Call will be created if it doesn't exist
+
+        setClient(videoClient);
+        setCall(callInstance);
+      } catch (error) {
+        console.log('Error init call:', error);
+        toast.error('Cannot connect to the call.');
+      } finally {
+        setIsConnecting(false);
+      }
+    };
+
+    initCall();
+  }, [tokenData, user, callId]);
+
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="relative w-full max-w-4xl mx-auto">CallPage</div>

@@ -1,7 +1,7 @@
 import { Inngest } from 'inngest';
 import { connectDb } from './db.config.js';
 import { User } from '../models/user.models.js';
-import { deleteStreamUser, upsertStreamUser } from './stream.config.js';
+import { addUserToPublicChannels, deleteStreamUser, upsertStreamUser } from './stream.config.js';
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: 'slackify' });
@@ -30,6 +30,7 @@ const syncUser = inngest.createFunction(
       name: newUser.name,
       image: newUser.image,
     });
+    await addUserToPublicChannels(newUser.clerkId.toString());
   }
 );
 

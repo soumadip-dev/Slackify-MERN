@@ -42,15 +42,6 @@ const CreateChannelModal = ({ onClose }) => {
     fetchUsers();
   }, [client]);
 
-  // Reset state when the modal is closed (NOT NIDDED)
-  useEffect(() => {
-    setChannelName('');
-    setDescription('');
-    setChannelType('public');
-    setError('');
-    setSelectedMembers([]);
-  }, []);
-
   // If channel type is public, set selected members to all users
   useEffect(() => {
     if (channelType === 'public') {
@@ -140,7 +131,7 @@ const CreateChannelModal = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[1000]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="bg-gradient-to-br from-[#2D1B4E] via-[#1E103C] to-[#2D1B4E] backdrop-blur-xl rounded-3xl w-[560px] max-w-[90vw] max-h-[85vh] overflow-hidden shadow-2xl border border-purple-500/20 relative">
         <div className="flex items-center justify-between p-6 border-b border-purple-400/20">
           <h2 className="text-xl font-semibold text-white">Create a channel</h2>

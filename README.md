@@ -16,8 +16,6 @@
   <img src="./client/public/SS_README.png" alt="Slackify screenshot" width="900">
 </div>
 
-<p align="center">✨ Frontend in progress ✨</p>
-
 ## 🌟 Features
 
 - **💬 Real-time Messaging** – With threads, reactions, and pinned messages

@@ -104,6 +104,7 @@ const CustomChannelHeader = () => {
           <PinIcon className="size-4 text-gray-600" />
         </button>
       </div>
+
       {/* Show the MembersModal*/}
       {showMembers && (
         <MembersModal

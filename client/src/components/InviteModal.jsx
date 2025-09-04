@@ -57,29 +57,52 @@ const InviteModal = ({ channel, onClose }) => {
         </div>
 
         {/* CONTENT */}
-        <div className="">
-          {isLoadingUsers && <p>Loading users...</p>}
-          {error && <p className="">Failed to load users</p>}
-          {users.length === 0 && !isLoadingUsers && <p>No users found</p>}
+        <div className="px-6 py-4 max-h-[60vh] overflow-y-auto">
+          {isLoadingUsers && (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+            </div>
+          )}
 
-          {users.length > 0 &&
-            users.map(user => {
+          {error && (
+            <div className="py-4 text-center">
+              <p className="text-red-500 mb-2">Failed to load users</p>
+              <button
+                onClick={() => refetch()}
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {users.length === 0 && !isLoadingUsers && !error && (
+            <p className="text-center text-gray-500 py-8">No users available to invite</p>
+          )}
+
+          <div className="space-y-3">
+            {users.map(user => {
               const isChecked = selectedMembers.includes(user.id);
 
               return (
                 <label
                   key={user.id}
-                  className={`flex items-center gap-4 p-3 rounded-lg cursor-pointer transition-all shadow-sm bg-white hover:bg-[#f5f3ff] border-2 ${
-                    isChecked ? 'border-[#611f69] bg-[#f3e6fa]' : 'border-gray-200'
+                  className={`flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all ${
+                    isChecked
+                      ? 'bg-purple-50 border border-purple-200'
+                      : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
                   }`}
                 >
                   <input
                     type="checkbox"
-                    className="checkbox checbox-primay checkbox-sm accent-[#611f69]"
-                    value={user.id}
+                    className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
+                    checked={isChecked}
                     onChange={e => {
-                      if (e.target.checked) setSelectedMembers([...selectedMembers, user.id]);
-                      else setSelectedMembers(selectedMembers.filter(id => id !== user.id));
+                      if (e.target.checked) {
+                        setSelectedMembers([...selectedMembers, user.id]);
+                      } else {
+                        setSelectedMembers(selectedMembers.filter(id => id !== user.id));
+                      }
                     }}
                   />
 
@@ -87,34 +110,46 @@ const InviteModal = ({ channel, onClose }) => {
                     <img
                       src={user.image}
                       alt={user.name}
-                      className="size-9 rounded-full object-cover border border-gray-300"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-300"
                     />
                   ) : (
-                    <div className="size-9 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold text-lg">
                       {(user.name || user.id).charAt(0).toUpperCase()}
                     </div>
                   )}
 
-                  <span className="font-medium text-[#611f69] text-base">
+                  <span className="font-medium text-gray-900 text-base flex-1">
                     {user.name || user.id}
                   </span>
                 </label>
               );
             })}
-
-          {/* ACTIONS */}
-          <div className="">
-            <button className="btn btn-secondary" onClick={onClose} disabled={isInviting}>
-              Cancel
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={handleInvite}
-              disabled={!selectedMembers.length || isInviting}
-            >
-              {isInviting ? 'Inviting...' : 'Invite'}
-            </button>
           </div>
+        </div>
+
+        {/* ACTIONS */}
+        <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200">
+          <button
+            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors"
+            onClick={onClose}
+            disabled={isInviting}
+          >
+            Cancel
+          </button>
+          <button
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 rounded-lg text-white transition-colors"
+            onClick={handleInvite}
+            disabled={selectedMembers.length === 0 || isInviting}
+          >
+            {isInviting ? (
+              <span className="flex items-center">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                Inviting...
+              </span>
+            ) : (
+              `Invite ${selectedMembers.length > 0 ? `(${selectedMembers.length})` : ''}`
+            )}
+          </button>
         </div>
       </div>
     </div>

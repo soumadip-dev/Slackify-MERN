@@ -42,15 +42,6 @@ const CreateChannelModal = ({ onClose }) => {
     fetchUsers();
   }, [client]);
 
-  // Reset state when the modal is closed (NOT NIDDED)
-  useEffect(() => {
-    setChannelName('');
-    setDescription('');
-    setChannelType('public');
-    setError('');
-    setSelectedMembers([]);
-  }, []);
-
   // If channel type is public, set selected members to all users
   useEffect(() => {
     if (channelType === 'public') {

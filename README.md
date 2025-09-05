@@ -31,6 +31,10 @@
   </tr>
 </table>
 
+## Live:
+
+[Slackify](https://slackify-delta.vercel.app/)
+
 ## 🌟 Features
 
 - **💬 Real-time Messaging** – With threads, reactions, and pinned messages

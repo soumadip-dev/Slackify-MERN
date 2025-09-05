@@ -20,13 +20,13 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="./client/public/SS_AUTH.png" alt="Auth Page" width="300">
+      <img src="./client/public/SS_AUTH.png" alt="Auth Page">
     </td>
     <td align="center">
-      <img src="./client/public/SS_CHAT.png" alt="Chat Page" width="300">
+      <img src="./client/public/SS_CHAT.png" alt="Chat Page">
     </td>
     <td align="center">
-      <img src="./client/public/SS_CALL.png" alt="Call Page" width="300">
+      <img src="./client/public/SS_CALL.png" alt="Call Page" >
     </td>
   </tr>
 </table>

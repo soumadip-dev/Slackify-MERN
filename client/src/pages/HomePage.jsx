@@ -63,7 +63,7 @@ const HomePage = () => {
               <div className="header-section px-5 py-5 border-b border-purple-400/20 flex items-center justify-between relative z-2 flex-shrink-0">
                 <div className="flex items-center gap-3 relative">
                   <img
-                    src="../../public/logo.png"
+                    src="/logo.png"
                     alt="Logo"
                     className="w-9 h-9 rounded-xl shadow-[0_8px_25px_rgba(74,21,75,0.4),_0_4px_15px_rgba(114,9,183,0.3),_inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_35px_rgba(74,21,75,0.5),_0_6px_20px_rgba(114,9,183,0.4),_inset_0_1px_0_rgba(255,255,255,0.25)]"
                   />

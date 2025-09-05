@@ -25,5 +25,3 @@ const CallContent = () => {
 };
 
 export default CallContent;
-
-

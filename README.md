@@ -1,12 +1,9 @@
 <h1 align="center">
   <br>
-  💬 Slackify (MERN) ⚡
+  Slackify 💬 
   <br>
 </h1>
 
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=react,nodejs,express,mongodb,tailwind,github" alt="Tech Stack" width="270">
-</div>
 
 <p align="center">
   A full-stack Slack-inspired communication app featuring real-time messaging, threads, reactions, polls, file sharing, 1-on-1 and group video calls with screen sharing, and more.

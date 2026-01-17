@@ -67,8 +67,8 @@
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/soumadip-dev/Slackify-MERN.git
-   cd Slackify-MERN
+   git clone https://github.com/soumadip-dev/Slackify.git
+   cd Slackify
    ```
 
 2. **Backend Setup**

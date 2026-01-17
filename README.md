@@ -4,9 +4,8 @@
   <br>
 </h1>
 
-
 <p align="center">
-  A full-stack Slack-inspired communication app featuring real-time messaging, threads, reactions, polls, file sharing, 1-on-1 and group video calls with screen sharing, and more.
+  A full-stack Slack-inspired communication app featuring real-time messaging, threads, reactions, polls, file sharing, 1-on-1 and group video calls and more.
 </p>
 
 <table align="center">
@@ -28,11 +27,13 @@
   </tr>
 </table>
 
-## Live:
+---
+
+## 🌍 Live Demo:
 
 [Slackify](https://slackify-delta.vercel.app/)
 
-## 🌟 Features
+## 🔋 Features
 
 - **💬 Real-time Messaging** – With threads, reactions, and pinned messages
 - **📤 File Sharing** – Supports images, PDFs, ZIPs, and more
@@ -53,7 +54,7 @@
 - **🔐 Authentication**: Clerk
 - **⚙ Background Jobs**: Inngest
 
-## 🛠️ Installation & Setup
+## 🤸 Installation
 
 ### Prerequisites
 
